@@ -7,8 +7,6 @@ export default class Precio {
         this.valor = valor;
     }
     getPrecio(){
-        return `${this.valor}`;
+        return `$${this.valor}`;
     }
 }
-//var precio1 = new Precio(125);
-//console.log(precio1.getPrecio());

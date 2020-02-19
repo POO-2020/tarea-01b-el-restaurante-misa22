@@ -2,7 +2,7 @@ import Precio from "./precio.js";
 export default class Producto {
     /**
      * @param {string} nombre 
-     * @param {number} precio
+     * @param {Precio} precio
      */
     constructor(nombre, precio) {
         this.nombre = nombre;

@@ -1,4 +1,4 @@
-class Direccion {
+export default class Direccion {
     /**
      * @param {string} calle
      * @param {number} numeroExteriro
@@ -24,6 +24,3 @@ class Direccion {
         return `${this.calle},${this.numeroExteriro},${this.numeroInterior},${this.colonia},${this.codigoPostal},${this.ciudad},${this.municipio}`
     }
 }
-/*var Direccion1 = new Direccion("morelos",23,"A","conchita",28510,"colima","cuahutemoc");
-console.log(Direccion1.getFormatoCorto());
-console.log(Direccion1.getFormatoExtendido());*/

@@ -1,4 +1,4 @@
-class Fecha{
+export default class Fecha{
     /**
      * @param {number} dia;
      * @param {number} mes;
@@ -42,6 +42,3 @@ class Fecha{
         return dia;
     }
 }
-
-var fecha1= new Fecha(14,2,2019);
-console.log(fecha1.getAños());
