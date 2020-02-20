@@ -1,37 +1,46 @@
 import Fecha from "./fecha.js";
 import Tiempo from "./tiempo.js";
+import Cliente from "./cliente.js";
 import ElementoPedido from "./elemento_pedido.js";
-export default class Pedido{
+import Precio from "./precio.js";
+
+export default class Pedido {
     /**
-     * @param {number} fecha;
-     * @param {number} hora;
-     * @param {string} cliente;
-     * @param {string} elementosPedidos;
+     * 
+     * @param {Fecha} fecha 
+     * @param {Tiempo} hora 
+     * @param {Cliente} cliente 
      */
-    constructor(fecha,hora,cliente,elementosPedidos){
+    constructor(fecha, hora, cliente) {
         this.fecha = fecha;
         this.hora = hora;
         this.cliente = cliente;
-        this.elementosPedidos = elementosPedidos;
+        this.elementosPedidos = [];
     }
-    getResumen(){
-       
-    }
-    getNumeroElementos(){
-        return `${this.elementosPedidos.length}`
-    }
-    getNumeroProductos(){
+    getNumeroElementos = _ => this.elementosPedidos.length;
 
+    getProductos = _ => {
+        let nProductos = 0;
+        this.elementosPedidos.forEach(elemento => {
+            nProductos+=elemento.cantidad;
+        });
+        return nProductos;
     }
-    getCostoTotal(){
 
+    getCostoTotal = _ => {
+        let costo = 0;
+        this.elementosPedidos.forEach(elemento => {
+            costo += elemento.cantidad * elemento.producto.precio.valor;
+        });
+        return new Precio(costo).getPrecio();
     }
-    agregarElemento(elemento){
-         this.elementosPedidos.push(elemento);
-    }
-    listarElementos(){
-      this.elementosPedidos.array.forEach(element => {
-          console.log(element.getDescripcion());
-      });
-    }
+
+    getResumen = _ =>
+        `${this.fecha.getFecha()}  ${this.hora.getFormato12()}\n-${this.getNumeroElementos()} elementos con ${this.getProductos()} productos-\ntotal: ${this.getCostoTotal()}`;
+    /**
+     * @param {ElementoPedido} elementos
+     */
+    agregarElemento = elemento => this.elementosPedidos.push(elemento);
+
+    listarElementos = _ => this.elementosPedidos.forEach(elemento => console.log(elemento.getDescripcion(), '\n'));
 }

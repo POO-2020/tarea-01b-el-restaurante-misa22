@@ -1,44 +1,29 @@
-export default class Fecha{
+export default class Fecha {
     /**
-     * @param {number} dia;
-     * @param {number} mes;
-     * @param {number} año;
+     * 
+     * @param {String} dia Dia del mes
+     * @param {String} mes Mes del año, comienza en 0(Enero)
+     * @param {String} annio Año de la fecha
      */
-    constructor(dia,mes,año){
-        this.fecha= new Date(año, mes-1,dia);
-        this.diaSem = ["Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado"];
-        this.meses= ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+    constructor(dia, mes, annio) {
+        this.fecha = new Date(annio, mes, dia);
     }
-    getAños(){
-        var difMseg = Date.now() - this.fecha;
-        var mSegAño= 1000 * 60 * 60 * 24 * 365;
-        var años = Math.trunc(difMseg/mSegAño);
-        return años;
+    formatearMsecs = (dividendo) => Math.trunc((Date.now() - this.fecha) / dividendo);
+
+    getAnnios = _ => this.formatearMsecs(31557600000);
+
+    getMeses = _ => this.formatearMsecs(2629800000);
+
+    getSemanas = _ => this.formatearMsecs(604800000);
+
+    getDias = _ => this.formatearMsecs(86400000);
+
+    getFecha = _ => {
+        const meses = ['En', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Agto', 'Sept', 'Oct', 'Nov', 'Dic'];
+        return `${this.fecha.getDate()}/${meses[this.fecha.getMonth()]}/${this.fecha.getFullYear()}`;
     }
-    getMeses(){
-        var difMseg = Date.now()-this.fecha ;
-        var mSegMes= 1000 * 60 * 60 * 24 * 28;
-        var meses= Math.trunc(difMseg/mSegMes);
-        return meses;
-    }
-    getSemanas(){
-        var difMseg = Date.now()-this.fecha;
-        var mSegSemana= 1000* 60*60*24*7;
-        var semanas= Math.trunc(difMseg/mSegSemana);
-        return semanas;
-    }
-    getDias(){
-        var difMseg= Date.now()-this.fecha;
-        var mSegDias= 1000*60*60*24;
-        var dias = Math.trunc(difMseg/mSegDias);
-        return dias;
-    }
-    getFecha(){
-        var numMes= this.meses[this.fecha.getMonth()];
-        return(`${this.fecha.getDate()}/${numMes}/${this.fecha.getFullYear()}`);
-    }
-    getDiaFecha(){
-        var dia= this.diaSem[this.fecha.getDay()];
-        return dia;
+    getDiaFecha = _ => {
+        const dias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+        return dias[this.fecha.getDay()];
     }
 }
